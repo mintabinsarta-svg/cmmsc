@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUMDES CMMSC - Cikahuripan Makmur Mandiri Sejahtera Cikahuripan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <!-- Logo BUMDES -->
+                    <div class="flex items-center space-x-2">
+                        <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                                <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                        <!-- Logo Desa (placeholder) -->
+                        <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-blue-600">BUMDES CMMSC</div>
+                        <div class="text-sm text-gray-600">Cikahuripan</div>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 transition-colors">Beranda</a>
+                    <a href="#services" class="text-gray-700 hover:text-blue-600 transition-colors">Layanan</a>
+                    <a href="#gallery" class="text-gray-700 hover:text-blue-600 transition-colors">Galeri</a>
+                    <a href="#profile" class="text-gray-700 hover:text-blue-600 transition-colors">Profil</a>
+                    <a href="#reports" class="text-gray-700 hover:text-blue-600 transition-colors">Laporan</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-600 transition-colors">Kontak</a>
+                    <button onclick="openModal('adminLoginModal')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Admin</button>
+                </div>
+                <button id="menuBtn" class="md:hidden text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">BUMDES CMMSC</h1>
+            <h2 class="text-xl md:text-2xl mb-4">Cikahuripan Makmur Mandiri Sejahtera Cikahuripan</h2>
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
+                Melayani kebutuhan digital desa dengan internet berkualitas, perdagangan online, 
+                pengelolaan sampah, dan ketahanan pangan untuk kemajuan Desa Cikahuripan
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openModal('internetModal')" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Daftar Internet Desa
+                </button>
+                <button onclick="openModal('tokoModal')" class="bg-yellow-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                    Belanja Online
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800">Unit Usaha Kami</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Internet Desa -->
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-xl card-hover cursor-pointer" onclick="openModal('internetModal')">
+                    <div class="text-4xl mb-4">🌐</div>
+                    <h3 class="text-xl font-bold mb-2">Internet Desa</h3>
+                    <p class="text-blue-100">Layanan internet berkualitas untuk seluruh warga desa</p>
+                </div>
+
+                <!-- Perdagangan & Jasa -->
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-xl card-hover cursor-pointer" onclick="openModal('perdaganganModal')">
+                    <div class="text-4xl mb-4">🏪</div>
+                    <h3 class="text-xl font-bold mb-2">Perdagangan & Jasa</h3>
+                    <p class="text-green-100">Toko Bumdes, sewa kios, lapak, dan lapangan</p>
+                </div>
+
+                <!-- Pengelolaan Sampah -->
+                <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white p-6 rounded-xl card-hover cursor-pointer" onclick="openModal('sampahModal')">
+                    <div class="text-4xl mb-4">♻️</div>
+                    <h3 class="text-xl font-bold mb-2">Pengelolaan Sampah</h3>
+                    <p class="text-emerald-100">Solusi pengelolaan sampah ramah lingkungan</p>
+                </div>
+
+                <!-- Ketahanan Pangan -->
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-6 rounded-xl card-hover cursor-pointer" onclick="openModal('panganModal')">
+                    <div class="text-4xl mb-4">🐔</div>
+                    <h3 class="text-xl font-bold mb-2">Ketahanan Pangan</h3>
+                    <p class="text-orange-100">Peternakan ayam petelur untuk kebutuhan protein</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800">Galeri BUMDES CMMSC</h2>
+            
+            <!-- Video Section -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-center mb-8 text-blue-600">Video Profil Desa</h3>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-gray-200 rounded-xl aspect-video flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-6xl mb-4">🎥</div>
+                            <p class="text-gray-600 mb-4">Video Profil BUMDES CMMSC</p>
+                            <button onclick="openModal('videoModal')" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                                Tonton Video
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Gallery -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-center mb-8 text-green-600">Galeri Foto Kegiatan</h3>
+                <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Photo placeholders with descriptions -->
+                    <div class="bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl aspect-square flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="openModal('photoModal1')">
+                        <div class="text-4xl mb-2">🌐</div>
+                        <p class="text-sm text-center font-medium">Pemasangan Internet Desa</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-100 to-green-200 rounded-xl aspect-square flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="openModal('photoModal2')">
+                        <div class="text-4xl mb-2">🏪</div>
+                        <p class="text-sm text-center font-medium">Toko BUMDES</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-xl aspect-square flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="openModal('photoModal3')">
+                        <div class="text-4xl mb-2">♻️</div>
+                        <p class="text-sm text-center font-medium">Pengelolaan Sampah</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl aspect-square flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="openModal('photoModal4')">
+                        <div class="text-4xl mb-2">🐔</div>
+                        <p class="text-sm text-center font-medium">Peternakan Ayam</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl aspect-square flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="openModal('photoModal5')">
+                        <div class="text-4xl mb-2">🏛️</div>
+                        <p class="text-sm text-center font-medium">Kantor BUMDES</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl aspect-square flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="openModal('photoModal6')">
+                        <div class="text-4xl mb-2">🤝</div>
+                        <p class="text-sm text-center font-medium">Rapat Pengurus</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-red-100 to-red-200 rounded-xl aspect-square flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="openModal('photoModal7')">
+                        <div class="text-4xl mb-2">🎉</div>
+                        <p class="text-sm text-center font-medium">Event Desa</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl aspect-square flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-lg transition-shadow" onclick="openModal('photoModal8')">
+                        <div class="text-4xl mb-2">📊</div>
+                        <p class="text-sm text-center font-medium">Laporan Keuangan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Profil BUMDES CMMSC</h2>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-blue-600">Cikahuripan Makmur Mandiri Sejahtera Cikahuripan</h3>
+                        <div class="space-y-4 text-gray-700">
+                            <div class="flex items-start">
+                                <span class="font-semibold w-24">Berdiri:</span>
+                                <span>Tahun 2018</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="font-semibold w-24">SK Kemenkumham:</span>
+                                <span>Juni 2022</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="font-semibold w-24">Alamat:</span>
+                                <span>Jl. Klapanunggal - Bojong Kp. Palahlar RT. 019/008 Desa Cikahuripan Kec. Klapanunggal Kab. Bogor Jawa Barat</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="font-semibold w-24">Email:</span>
+                                <span>cmms.cikahuripan@gmail.com</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="font-semibold w-24">No. HP:</span>
+                                <span>082125415593</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 p-8 rounded-xl">
+                        <h4 class="text-xl font-bold mb-4 text-blue-600">Visi & Misi</h4>
+                        <div class="space-y-4 text-gray-700">
+                            <div>
+                                <h5 class="font-semibold mb-2">Visi:</h5>
+                                <p>Menjadi Bumdes yang mandiri, sejahtera, dan berkelanjutan untuk kemajuan Desa Cikahuripan</p>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">Misi:</h5>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>Menyediakan layanan internet berkualitas</li>
+                                    <li>Mengembangkan ekonomi desa melalui perdagangan</li>
+                                    <li>Mengelola sampah secara berkelanjutan</li>
+                                    <li>Meningkatkan ketahanan pangan desa</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reports Section -->
+    <section id="reports" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800">Laporan BUMDES CMMSC</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-blue-50 p-6 rounded-xl text-center">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">150+</div>
+                    <div class="text-gray-700">Pelanggan Internet Aktif</div>
+                </div>
+                <div class="bg-green-50 p-6 rounded-xl text-center">
+                    <div class="text-3xl font-bold text-green-600 mb-2">25</div>
+                    <div class="text-gray-700">Kios & Lapak Tersewa</div>
+                </div>
+                <div class="bg-orange-50 p-6 rounded-xl text-center">
+                    <div class="text-3xl font-bold text-orange-600 mb-2">500+</div>
+                    <div class="text-gray-700">Ayam Petelur Produktif</div>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-gray-50 p-8 rounded-xl">
+                <h3 class="text-2xl font-bold mb-6 text-center">Laporan Keuangan Bulanan</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-blue-600 text-white">
+                            <tr>
+                                <th class="p-3">Unit Usaha</th>
+                                <th class="p-3">Pendapatan</th>
+                                <th class="p-3">Pengeluaran</th>
+                                <th class="p-3">Laba</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            <tr class="border-b">
+                                <td class="p-3">Internet Desa</td>
+                                <td class="p-3 text-green-600">Rp 45.000.000</td>
+                                <td class="p-3 text-red-600">Rp 25.000.000</td>
+                                <td class="p-3 text-blue-600">Rp 20.000.000</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3">Perdagangan & Jasa</td>
+                                <td class="p-3 text-green-600">Rp 30.000.000</td>
+                                <td class="p-3 text-red-600">Rp 18.000.000</td>
+                                <td class="p-3 text-blue-600">Rp 12.000.000</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3">Pengelolaan Sampah</td>
+                                <td class="p-3 text-green-600">Rp 15.000.000</td>
+                                <td class="p-3 text-red-600">Rp 8.000.000</td>
+                                <td class="p-3 text-blue-600">Rp 7.000.000</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3">Ketahanan Pangan</td>
+                                <td class="p-3 text-green-600">Rp 20.000.000</td>
+                                <td class="p-3 text-red-600">Rp 12.000.000</td>
+                                <td class="p-3 text-blue-600">Rp 8.000.000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-blue-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">Hubungi Kami</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="text-2xl mb-2">📍</div>
+                    <h3 class="font-bold mb-2">Alamat</h3>
+                    <p class="text-blue-100">Jl. Klapanunggal - Bojong Kp. Palahlar RT. 019/008 Desa Cikahuripan</p>
+                </div>
+                <div>
+                    <div class="text-2xl mb-2">📞</div>
+                    <h3 class="font-bold mb-2">Telepon</h3>
+                    <p class="text-blue-100">082125415593</p>
+                </div>
+                <div>
+                    <div class="text-2xl mb-2">✉️</div>
+                    <h3 class="font-bold mb-2">Email</h3>
+                    <p class="text-blue-100">cmms.cikahuripan@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 BUMDES CMMSC - Cikahuripan Makmur Mandiri Sejahtera Cikahuripan. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    
+    <!-- Internet Registration Modal -->
+    <div id="internetModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-blue-600">Pendaftaran Internet Desa</h3>
+                <button onclick="closeModal('internetModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <form id="internetForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                    <input type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">NIK</label>
+                    <input type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Alamat Lengkap</label>
+                    <textarea required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="3"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">No. HP</label>
+                    <input type="tel" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Paket Internet</label>
+                    <select required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Pilih Paket</option>
+                        <option value="basic">Basic - 10 Mbps - Rp 200.000/bulan</option>
+                        <option value="standard">Standard - 20 Mbps - Rp 350.000/bulan</option>
+                        <option value="premium">Premium - 50 Mbps - Rp 500.000/bulan</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    Daftar Sekarang
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Perdagangan Modal -->
+    <div id="perdaganganModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-green-600">Perdagangan & Jasa</h3>
+                <button onclick="closeModal('perdaganganModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <button onclick="openModal('sewaModal')" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                    Sewa Kios & Lapangan
+                </button>
+                <button onclick="openModal('tokoModal')" class="w-full bg-yellow-500 text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                    Belanja di Toko Bumdes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sewa Modal -->
+    <div id="sewaModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-green-600">Pendaftaran Sewa</h3>
+                <button onclick="closeModal('sewaModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <form id="sewaForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                    <input type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">No. HP</label>
+                    <input type="tel" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Sewa</label>
+                    <select required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">Pilih Jenis</option>
+                        <option value="kios">Kios - Rp 500.000/bulan</option>
+                        <option value="lapak">Lapak - Rp 200.000/bulan</option>
+                        <option value="lapangan">Lapangan - Rp 100.000/hari</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Durasi Sewa</label>
+                    <input type="text" required placeholder="Contoh: 6 bulan, 1 tahun, 3 hari" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Keperluan</label>
+                    <textarea required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" rows="3"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                    Ajukan Sewa
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toko Modal -->
+    <div id="tokoModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-yellow-600">Toko BUMDES CMMSC Online</h3>
+                <button onclick="closeModal('tokoModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="space-y-4 max-h-96 overflow-y-auto">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="border rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">🌾</div>
+                        <h4 class="font-semibold">Beras Premium</h4>
+                        <p class="text-sm text-gray-600">Rp 15.000/kg</p>
+                        <button onclick="addToCart('Beras Premium', 15000)" class="mt-2 bg-yellow-500 text-white px-3 py-1 rounded text-sm hover:bg-yellow-600">Tambah</button>
+                    </div>
+                    <div class="border rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">🥚</div>
+                        <h4 class="font-semibold">Telur Ayam</h4>
+                        <p class="text-sm text-gray-600">Rp 2.500/butir</p>
+                        <button onclick="addToCart('Telur Ayam', 2500)" class="mt-2 bg-yellow-500 text-white px-3 py-1 rounded text-sm hover:bg-yellow-600">Tambah</button>
+                    </div>
+                    <div class="border rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">🥬</div>
+                        <h4 class="font-semibold">Sayur Segar</h4>
+                        <p class="text-sm text-gray-600">Rp 5.000/ikat</p>
+                        <button onclick="addToCart('Sayur Segar', 5000)" class="mt-2 bg-yellow-500 text-white px-3 py-1 rounded text-sm hover:bg-yellow-600">Tambah</button>
+                    </div>
+                    <div class="border rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">🍯</div>
+                        <h4 class="font-semibold">Madu Murni</h4>
+                        <p class="text-sm text-gray-600">Rp 50.000/botol</p>
+                        <button onclick="addToCart('Madu Murni', 50000)" class="mt-2 bg-yellow-500 text-white px-3 py-1 rounded text-sm hover:bg-yellow-600">Tambah</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 border-t pt-4">
+                <div id="cartItems" class="space-y-2 mb-4"></div>
+                <div class="flex justify-between items-center font-bold">
+                    <span>Total: </span>
+                    <span id="cartTotal">Rp 0</span>
+                </div>
+                <button onclick="checkout()" class="w-full mt-4 bg-yellow-600 text-white py-3 rounded-lg font-semibold hover:bg-yellow-700 transition-colors">
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sampah Modal -->
+    <div id="sampahModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-emerald-600">Pengelolaan Sampah Desa</h3>
+                <button onclick="closeModal('sampahModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-emerald-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Layanan Kami:</h4>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        <li>Pengumpulan sampah rumah tangga</li>
+                        <li>Pemilahan sampah organik dan anorganik</li>
+                        <li>Pengolahan kompos</li>
+                        <li>Daur ulang sampah plastik</li>
+                        <li>Bank sampah dengan sistem poin</li>
+                    </ul>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Jadwal Pengumpulan:</h4>
+                    <p class="text-sm">Senin, Rabu, Jumat - Pukul 07.00-10.00 WIB</p>
+                </div>
+                <button class="w-full bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors">
+                    Hubungi Petugas
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pangan Modal -->
+    <div id="panganModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-orange-600">Ketahanan Pangan - Peternakan Ayam</h3>
+                <button onclick="closeModal('panganModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-orange-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Produk Kami:</h4>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        <li>Telur ayam segar berkualitas tinggi</li>
+                        <li>Ayam potong organik</li>
+                        <li>Pupuk kandang berkualitas</li>
+                        <li>Bibit ayam petelur unggul</li>
+                    </ul>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-orange-600">500+</div>
+                        <div class="text-sm">Ayam Petelur</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-orange-600">300+</div>
+                        <div class="text-sm">Telur/Hari</div>
+                    </div>
+                </div>
+                <button class="w-full bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
+                    Pesan Produk
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-blue-600">Login Admin</h3>
+                <button onclick="closeModal('adminLoginModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <form id="adminLoginForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                    <input type="text" id="adminUsername" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" id="adminPassword" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-blue-600">Video Profil BUMDES CMMSC</h3>
+                <button onclick="closeModal('videoModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="bg-gray-200 rounded-xl aspect-video flex items-center justify-center mb-4">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">🎥</div>
+                    <p class="text-gray-600 mb-4">Upload video Anda di sini</p>
+                    <input type="file" accept="video/*" class="hidden" id="videoUpload">
+                    <button onclick="document.getElementById('videoUpload').click()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Upload Video
+                    </button>
+                </div>
+            </div>
+            <p class="text-sm text-gray-600 text-center">
+                <strong>Petunjuk:</strong> Upload video profil BUMDES, kegiatan desa, atau dokumentasi unit usaha. 
+                Format yang didukung: MP4, AVI, MOV (maksimal 50MB)
+            </p>
+        </div>
+    </div>
+
+    <!-- Photo Modals -->
+    <div id="photoModal1" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-blue-600">Pemasangan Internet Desa</h3>
+                <button onclick="closeModal('photoModal1')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl aspect-video flex items-center justify-center mb-4">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">🌐</div>
+                    <p class="text-gray-600 mb-4">Upload foto pemasangan internet</p>
+                    <input type="file" accept="image/*" class="hidden" id="photoUpload1">
+                    <button onclick="document.getElementById('photoUpload1').click()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Upload Foto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="photoModal2" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-green-600">Toko BUMDES</h3>
+                <button onclick="closeModal('photoModal2')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="bg-gradient-to-br from-green-100 to-green-200 rounded-xl aspect-video flex items-center justify-center mb-4">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">🏪</div>
+                    <p class="text-gray-600 mb-4">Upload foto toko BUMDES</p>
+                    <input type="file" accept="image/*" class="hidden" id="photoUpload2">
+                    <button onclick="document.getElementById('photoUpload2').click()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        Upload Foto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="photoModal3" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-emerald-600">Pengelolaan Sampah</h3>
+                <button onclick="closeModal('photoModal3')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-xl aspect-video flex items-center justify-center mb-4">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">♻️</div>
+                    <p class="text-gray-600 mb-4">Upload foto pengelolaan sampah</p>
+                    <input type="file" accept="image/*" class="hidden" id="photoUpload3">
+                    <button onclick="document.getElementById('photoUpload3').click()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors">
+                        Upload Foto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="photoModal4" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-orange-600">Peternakan Ayam</h3>
+                <button onclick="closeModal('photoModal4')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl aspect-video flex items-center justify-center mb-4">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">🐔</div>
+                    <p class="text-gray-600 mb-4">Upload foto peternakan ayam</p>
+                    <input type="file" accept="image/*" class="hidden" id="photoUpload4">
+                    <button onclick="document.getElementById('photoUpload4').click()" class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                        Upload Foto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="photoModal5" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">Kantor BUMDES</h3>
+                <button onclick="closeModal('photoModal5')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl aspect-video flex items-center justify-center mb-4">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">🏛️</div>
+                    <p class="text-gray-600 mb-4">Upload foto kantor BUMDES</p>
+                    <input type="file" accept="image/*" class="hidden" id="photoUpload5">
+                    <button onclick="document.getElementById('photoUpload5').click()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                        Upload Foto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="photoModal6" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-yellow-600">Rapat Pengurus</h3>
+                <button onclick="closeModal('photoModal6')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl aspect-video flex items-center justify-center mb-4">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">🤝</div>
+                    <p class="text-gray-600 mb-4">Upload foto rapat pengurus</p>
+                    <input type="file" accept="image/*" class="hidden" id="photoUpload6">
+                    <button onclick="document.getElementById('photoUpload6').click()" class="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors">
+                        Upload Foto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="photoModal7" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-red-600">Event Desa</h3>
+                <button onclick="closeModal('photoModal7')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="bg-gradient-to-br from-red-100 to-red-200 rounded-xl aspect-video flex items-center justify-center mb-4">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <p class="text-gray-600 mb-4">Upload foto event desa</p>
+                    <input type="file" accept="image/*" class="hidden" id="photoUpload7">
+                    <button onclick="document.getElementById('photoUpload7').click()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                        Upload Foto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="photoModal8" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-indigo-600">Laporan Keuangan</h3>
+                <button onclick="closeModal('photoModal8')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl aspect-video flex items-center justify-center mb-4">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">📊</div>
+                    <p class="text-gray-600 mb-4">Upload foto laporan keuangan</p>
+                    <input type="file" accept="image/*" class="hidden" id="photoUpload8">
+                    <button onclick="document.getElementById('photoUpload8').click()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                        Upload Foto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logo Upload Modal -->
+    <div id="logoUploadModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-blue-600">Upload Logo BUMDES & Desa</h3>
+                <button onclick="closeModal('logoUploadModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="space-y-6">
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                    <div class="text-4xl mb-4">🏛️</div>
+                    <h4 class="font-semibold mb-2">Logo BUMDES</h4>
+                    <input type="file" accept="image/*" class="hidden" id="bumdesLogoUpload">
+                    <button onclick="document.getElementById('bumdesLogoUpload').click()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Upload Logo BUMDES
+                    </button>
+                </div>
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                    <div class="text-4xl mb-4">🏘️</div>
+                    <h4 class="font-semibold mb-2">Logo Desa</h4>
+                    <input type="file" accept="image/*" class="hidden" id="desaLogoUpload">
+                    <button onclick="document.getElementById('desaLogoUpload').click()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        Upload Logo Desa
+                    </button>
+                </div>
+                <div class="text-sm text-gray-600">
+                    <p><strong>Petunjuk:</strong></p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>Format yang didukung: PNG, JPG, SVG</li>
+                        <li>Ukuran maksimal: 2MB</li>
+                        <li>Resolusi yang disarankan: 200x200px</li>
+                        <li>Background transparan untuk hasil terbaik</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Modal -->
+    <div id="adminDashboardModal" class="modal">
+        <div class="modal-content" style="max-width: 800px; max-height: 90vh;">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-blue-600">Dashboard Admin BUMDES CMMSC</h3>
+                <button onclick="closeModal('adminDashboardModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-bold text-blue-600 mb-2">📊 Statistik Hari Ini</h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span>Pendaftaran Internet Baru:</span>
+                            <span class="font-semibold">3</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Pesanan Toko Online:</span>
+                            <span class="font-semibold">12</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Pengajuan Sewa:</span>
+                            <span class="font-semibold">2</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-bold text-green-600 mb-2">💰 Pendapatan Hari Ini</h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span>Internet:</span>
+                            <span class="font-semibold">Rp 1.050.000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Toko Online:</span>
+                            <span class="font-semibold">Rp 450.000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Sewa:</span>
+                            <span class="font-semibold">Rp 300.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button onclick="showAdminSection('internet')" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                        Kelola Internet
+                    </button>
+                    <button onclick="showAdminSection('toko')" class="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors">
+                        Kelola Toko
+                    </button>
+                    <button onclick="showAdminSection('sewa')" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">
+                        Kelola Sewa
+                    </button>
+                    <button onclick="openModal('logoUploadModal')" class="bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">
+                        Upload Media
+                    </button>
+                </div>
+
+                <!-- Internet Management Section -->
+                <div id="internetAdmin" class="admin-section">
+                    <h4 class="text-lg font-bold mb-4">🌐 Manajemen Internet Desa</h4>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h5 class="font-semibold mb-3">Pendaftaran Terbaru:</h5>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between items-center bg-white p-2 rounded">
+                                <div>
+                                    <span class="font-medium">Budi Santoso</span>
+                                    <span class="text-gray-500 ml-2">Paket Premium</span>
+                                </div>
+                                <div class="space-x-2">
+                                    <button class="bg-green-500 text-white px-2 py-1 rounded text-xs hover:bg-green-600">Setujui</button>
+                                    <button class="bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600">Tolak</button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center bg-white p-2 rounded">
+                                <div>
+                                    <span class="font-medium">Siti Aminah</span>
+                                    <span class="text-gray-500 ml-2">Paket Standard</span>
+                                </div>
+                                <div class="space-x-2">
+                                    <button class="bg-green-500 text-white px-2 py-1 rounded text-xs hover:bg-green-600">Setujui</button>
+                                    <button class="bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600">Tolak</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-4">
+                            <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Jadwal Pemasangan</button>
+                            <button class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600">Kelola Pelanggan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toko Management Section -->
+                <div id="tokoAdmin" class="admin-section" style="display: none;">
+                    <h4 class="text-lg font-bold mb-4">🛒 Manajemen Toko Online</h4>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h5 class="font-semibold mb-3">Pesanan Terbaru:</h5>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between items-center bg-white p-2 rounded">
+                                <div>
+                                    <span class="font-medium">Ahmad Rizki</span>
+                                    <span class="text-gray-500 ml-2">Beras 5kg, Telur 10 butir</span>
+                                </div>
+                                <div class="space-x-2">
+                                    <button class="bg-yellow-500 text-white px-2 py-1 rounded text-xs hover:bg-yellow-600">Proses</button>
+                                    <button class="bg-green-500 text-white px-2 py-1 rounded text-xs hover:bg-green-600">Kirim</button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center bg-white p-2 rounded">
+                                <div>
+                                    <span class="font-medium">Dewi Sartika</span>
+                                    <span class="text-gray-500 ml-2">Sayur 3 ikat, Madu 1 botol</span>
+                                </div>
+                                <div class="space-x-2">
+                                    <button class="bg-yellow-500 text-white px-2 py-1 rounded text-xs hover:bg-yellow-600">Proses</button>
+                                    <button class="bg-green-500 text-white px-2 py-1 rounded text-xs hover:bg-green-600">Kirim</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-4">
+                            <button class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">Kelola Produk</button>
+                            <button class="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600">Laporan Penjualan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sewa Management Section -->
+                <div id="sewaAdmin" class="admin-section" style="display: none;">
+                    <h4 class="text-lg font-bold mb-4">🏪 Manajemen Sewa</h4>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h5 class="font-semibold mb-3">Pengajuan Sewa:</h5>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between items-center bg-white p-2 rounded">
+                                <div>
+                                    <span class="font-medium">Warung Makan Pak Joko</span>
+                                    <span class="text-gray-500 ml-2">Kios - 1 tahun</span>
+                                </div>
+                                <div class="space-x-2">
+                                    <button class="bg-green-500 text-white px-2 py-1 rounded text-xs hover:bg-green-600">Setujui</button>
+                                    <button class="bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600">Tolak</button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center bg-white p-2 rounded">
+                                <div>
+                                    <span class="font-medium">Event Pernikahan</span>
+                                    <span class="text-gray-500 ml-2">Lapangan - 2 hari</span>
+                                </div>
+                                <div class="space-x-2">
+                                    <button class="bg-green-500 text-white px-2 py-1 rounded text-xs hover:bg-green-600">Setujui</button>
+                                    <button class="bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600">Tolak</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-4">
+                            <button class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Jadwal Sewa</button>
+                            <button class="bg-teal-500 text-white py-2 px-4 rounded hover:bg-teal-600">Kelola Aset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        let cartTotal = 0;
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function addToCart(name, price) {
+            cart.push({name, price});
+            cartTotal += price;
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            
+            cartItems.innerHTML = '';
+            cart.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'flex justify-between items-center text-sm';
+                itemDiv.innerHTML = `
+                    <span>${item.name}</span>
+                    <div>
+                        <span>Rp ${item.price.toLocaleString()}</span>
+                        <button onclick="removeFromCart(${index})" class="ml-2 text-red-500 hover:text-red-700">×</button>
+                    </div>
+                `;
+                cartItems.appendChild(itemDiv);
+            });
+            
+            cartTotalElement.textContent = `Rp ${cartTotal.toLocaleString()}`;
+        }
+
+        function removeFromCart(index) {
+            cartTotal -= cart[index].price;
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Keranjang belanja kosong!');
+                return;
+            }
+            
+            alert(`Terima kasih! Total belanja Anda: Rp ${cartTotal.toLocaleString()}\n\nSilakan hubungi kami di 082125415593 untuk konfirmasi pesanan.`);
+            cart = [];
+            cartTotal = 0;
+            updateCartDisplay();
+            closeModal('tokoModal');
+        }
+
+        // Admin functionality
+        function showAdminSection(section) {
+            // Hide all admin sections
+            document.querySelectorAll('.admin-section').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // Show selected section
+            document.getElementById(section + 'Admin').style.display = 'block';
+        }
+
+        // Admin login
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            // Simple demo login (in real app, this would be secure authentication)
+            if (username === 'admin' && password === 'bumdes2024') {
+                closeModal('adminLoginModal');
+                openModal('adminDashboardModal');
+                this.reset();
+            } else {
+                alert('Username atau password salah!\n\nDemo login:\nUsername: admin\nPassword: bumdes2024');
+            }
+        });
+
+        // Form submissions
+        document.getElementById('internetForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Pendaftaran internet berhasil dikirim! Kami akan menghubungi Anda dalam 1x24 jam.');
+            closeModal('internetModal');
+            this.reset();
+        });
+
+        document.getElementById('sewaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Pengajuan sewa berhasil dikirim! Kami akan menghubungi Anda untuk konfirmasi.');
+            closeModal('sewaModal');
+            this.reset();
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            alert('Menu mobile - fitur ini akan dikembangkan lebih lanjut');
+        });
+
+        // File upload functionality
+        function handleFileUpload(inputId, previewId) {
+            const input = document.getElementById(inputId);
+            const preview = document.getElementById(previewId);
+            
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        if (file.type.startsWith('image/')) {
+                            preview.innerHTML = `<img src="${e.target.result}" alt="Preview" class="w-full h-full object-cover rounded-xl">`;
+                        } else if (file.type.startsWith('video/')) {
+                            preview.innerHTML = `<video src="${e.target.result}" controls class="w-full h-full rounded-xl"></video>`;
+                        }
+                        alert(`File "${file.name}" berhasil diupload!`);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Initialize file upload handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            // Logo uploads
+            document.getElementById('bumdesLogoUpload').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Update logo in navigation
+                        const logoContainer = document.querySelector('.w-12.h-12.bg-blue-600');
+                        logoContainer.innerHTML = `<img src="${e.target.result}" alt="Logo BUMDES" class="w-full h-full object-cover rounded-full">`;
+                        alert('Logo BUMDES berhasil diupload!');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            document.getElementById('desaLogoUpload').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Update logo in navigation
+                        const logoContainer = document.querySelector('.w-12.h-12.bg-green-600');
+                        logoContainer.innerHTML = `<img src="${e.target.result}" alt="Logo Desa" class="w-full h-full object-cover rounded-full">`;
+                        alert('Logo Desa berhasil diupload!');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Photo uploads
+            for (let i = 1; i <= 8; i++) {
+                document.getElementById(`photoUpload${i}`).addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const modal = document.querySelector(`#photoModal${i} .bg-gradient-to-br`);
+                            modal.innerHTML = `<img src="${e.target.result}" alt="Uploaded photo" class="w-full h-full object-cover rounded-xl">`;
+                            alert(`Foto berhasil diupload!`);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
+            // Video upload
+            document.getElementById('videoUpload').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const videoContainer = document.querySelector('#videoModal .bg-gray-200');
+                        videoContainer.innerHTML = `<video src="${e.target.result}" controls class="w-full h-full rounded-xl"></video>`;
+                        
+                        // Also update the main video section
+                        const mainVideoContainer = document.querySelector('#gallery .bg-gray-200');
+                        mainVideoContainer.innerHTML = `<video src="${e.target.result}" controls class="w-full h-full rounded-xl"></video>`;
+                        
+                        alert('Video berhasil diupload!');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96ccdfe347c0afeb',t:'MTc1NDgwMTQ0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
